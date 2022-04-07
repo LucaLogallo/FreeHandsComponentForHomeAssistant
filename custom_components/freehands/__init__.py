@@ -141,5 +141,5 @@ ret = client.publish("zigbee2mqtt/0x00158d0006e0f046/action", "single")
 # client1.connect("192.168.3.68")
 # client1.subscribe("tenant/company/gateway/sensore/misura/get/")
 
-client1.loop_forever() #client sottoscrito al broker mqtt nel bc di freehands
+# client1.loop_forever() #client sottoscrito al broker mqtt nel bc di freehands
 client.loop_forever() #client sottoscritto al broker mqtt interno a homeassistant
