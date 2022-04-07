@@ -91,31 +91,31 @@ def on_disconnect(client, userdata, rc=0):
     client.loop_stop()
 
 ###########################################################################################
-def on_connectToBrokerFreehands(client, userdata, rc):
-    if rc == 0:
-        _LOGGER.info("freeHands connected to MQTT Broker!")
-        # print("connected")
-    else:
-        _LOGGER.info("freeHands failed to connect, return code %d\n", rc)
+# def on_connectToBrokerFreehands(client, userdata, rc):
+#     if rc == 0:
+#         _LOGGER.info("freeHands connected to MQTT Broker!")
+#         # print("connected")
+#     else:
+#         _LOGGER.info("freeHands failed to connect, return code %d\n", rc)
 
 
-def on_messageToBrokerFreehands(client, userdata, msg):
-    _LOGGER.info(
-        "Received " + str(msg.payload.decode("utf-8")) + " from `{msg.topic}` topic"
-    )
+# def on_messageToBrokerFreehands(client, userdata, msg):
+#     _LOGGER.info(
+#         "Received " + str(msg.payload.decode("utf-8")) + " from `{msg.topic}` topic"
+#     )
 
 
-def on_publishToBrokerFreehands(
-    client, userdata, result
-):  # create function for callback
-    print("data published \n" + str(userdata))
-    print("result" + str(result))
-    pass
+# def on_publishToBrokerFreehands(
+#     client, userdata, result
+# ):  # create function for callback
+#     print("data published \n" + str(userdata))
+#     print("result" + str(result))
+#     pass
 
 
-def on_disconnectToBrokerFreehands(client, userdata, rc=0):
-    logging.debug("DisConnected result code " + str(rc))
-    client1.loop_stop()
+# def on_disconnectToBrokerFreehands(client, userdata, rc=0):
+#     logging.debug("DisConnected result code " + str(rc))
+#     client1.loop_stop()
 
 ###########################################################################################
 
@@ -127,19 +127,19 @@ client.on_disconnect = on_disconnect
 client.on_publish = on_publish
 client.connect("192.168.3.122", 1883)
 client.subscribe(topic)
-# ret = client.publish("zigbee2mqtt/0x00158d0006e0f046/action", "single")
+ret = client.publish("zigbee2mqtt/0x00158d0006e0f046/action", "single")
 
-usernameBrokerFreehands = "pippo"
-passwordBrokerFreehands = "pluto"
+# usernameBrokerFreehands = "pippo"
+# passwordBrokerFreehands = "pluto"
 
-client1 = mqtt_client.Client(client_id)
-client1.username_pw_set(usernameBrokerFreehands, passwordBrokerFreehands)
-client1.on_connect = on_connectToBrokerFreehands
-client1.on_message = on_messageToBrokerFreehands
-client1.on_disconnect = on_disconnectToBrokerFreehands
-client1.on_publish = on_publishToBrokerFreehands
-client1.connect("192.168.3.68")
-client1.subscribe("tenant/company/gateway/sensore/misura/get/")
+# client1 = mqtt_client.Client(client_id)
+# client1.username_pw_set(usernameBrokerFreehands, passwordBrokerFreehands)
+# client1.on_connect = on_connectToBrokerFreehands
+# client1.on_message = on_messageToBrokerFreehands
+# client1.on_disconnect = on_disconnectToBrokerFreehands
+# client1.on_publish = on_publishToBrokerFreehands
+# client1.connect("192.168.3.68")
+# client1.subscribe("tenant/company/gateway/sensore/misura/get/")
 
 client1.loop_forever() #client sottoscrito al broker mqtt nel bc di freehands
 client.loop_forever() #client sottoscritto al broker mqtt interno a homeassistant
